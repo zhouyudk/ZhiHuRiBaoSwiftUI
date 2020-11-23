@@ -66,6 +66,9 @@ struct DailySectionItem: View {
             Image(uiImage: remoteImage ?? UIImage(named: "haitun")!)
                 .resizable()
                 .frame(width: 80, height: 80, alignment: .center)
+                .onAppear(perform: {
+                    fetchRemoteImage(url: viewData.images.first ?? "")
+                })
         }
         .padding(.horizontal, 10)
         .frame(width: UIScreen.screenWidth, height: 80, alignment: .center)

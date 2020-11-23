@@ -10,13 +10,14 @@ import SwiftUI
 struct RiBaoBanner: View {
     @ObservedObject var todayNews: TodayNewsModel
     var body: some View {
-        TabView {
-            ForEach(todayNews.top_stories, id: \.id) { news in
-                BannerItem(itemData: news)
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(alignment: .center, spacing: 0) {
+                ForEach(todayNews.top_stories, id: \.id) { news in
+                    BannerItem(itemData: news)
+                }
             }
         }
         .frame(width: UIScreen.screenWidth, height: 400)
-        .tabViewStyle(PageTabViewStyle())
     }
 }
 

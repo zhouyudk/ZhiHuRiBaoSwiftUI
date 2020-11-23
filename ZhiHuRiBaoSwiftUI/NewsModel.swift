@@ -34,7 +34,7 @@ class TopNewsModel: HandyJSON, ObservableObject {
 
 class TodayNewsModel: HandyJSON, ObservableObject {
     var stories: [NewsModel] = [NewsModel()]
-    var top_stories: [TopNewsModel] = [TopNewsModel(),TopNewsModel()]
+    var top_stories: [TopNewsModel] = [TopNewsModel(),TopNewsModel(),TopNewsModel(),TopNewsModel()]
     required init() {
 
     }

@@ -33,6 +33,7 @@ struct BannerItem: View {
             }
             .padding(EdgeInsets(top: 0, leading: 20, bottom: 40, trailing: 0))
         }
+        .frame(width: UIScreen.screenWidth)
     }
 
     func fetchRemoteImage(url: String){
