@@ -9,8 +9,6 @@ import SwiftUI
 import RxSwift
 
 struct ContentView: View {
-    @State var topNewsModel: [TopNewsModel] = []
-    @State var dailyNewsDic: [String: [NewsModel]] = [:]
     let disposeBag = DisposeBag()
     @ObservedObject var viewModel = NewsViewModel()
     var body: some View {
@@ -29,19 +27,9 @@ struct ContentView: View {
             }
 
         }
-    }
-    init() {
-        registeObserver()
-        viewModel.queryTodayNews()
-    }
-    func registeObserver() {
-        viewModel.viewDataSubject.subscribe(onNext: { (vd) in
-            self.topNewsModel = vd.topNews
-//            self.dailyNewsDic = vd.dailyNews
-
-        }, onError: { (error) in
-            print(error)
-        }).disposed(by: disposeBag)
+        .onAppear(perform: {
+            viewModel.queryTodayNews()
+        })
     }
 }
 

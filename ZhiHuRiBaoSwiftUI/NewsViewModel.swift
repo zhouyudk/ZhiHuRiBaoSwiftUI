@@ -9,7 +9,6 @@ import Foundation
 import RxSwift
 
 class NewsViewModel: ObservableObject {
-    var viewDataSubject = BehaviorSubject<ViewData>(value: ViewData(topNews: [], dailyNews: []))
     @Published var topNews = [TopNewsModel]()
     @Published var dailyNews = [DailyNewsModel]()
     @Published var todayNews = TodayNewsModel()
@@ -27,7 +26,7 @@ class NewsViewModel: ObservableObject {
                 tn.stories = todayNews.stories
                 self.dailyNews.append(contentsOf: [tn])
                 self.todayNews = todayNews
-//                viewDataSubject.onNext(ViewData(topNews: todayNews.top_stories, dailyNews: [DailyNewsModel(date: "", stories: todayNews.stories)]))
+                self.queryDailyNews(beforeDays: 1)
             } onError: { (error) in
                 print(error)
             }
@@ -36,23 +35,15 @@ class NewsViewModel: ObservableObject {
 
     func queryDailyNews(beforeDays: Int) {
         let queryDate = Date().timeIntervalSince1970 - Double((beforeDays-1)*3600*24)
-        let showDate = Date().timeIntervalSince1970 - Double(beforeDays*3600*24)
         let df = DateFormatter()
-        df.setLocalizedDateFormatFromTemplate("yyyymmdd")
+        df.dateFormat = "yyyyMMdd"
         NetworkManager
             .shared
             .queryNewsBeforeDate(date: df.string(from: Date.init(timeIntervalSince1970: queryDate)))
             .observeOn(MainScheduler.instance)
             .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
-            .subscribe { (news) in
-                do {
-//                    var vd = try viewDataSubject.value()
-//                    vd.dailyNews[df.string(from: Date.init(timeIntervalSince1970: showDate))] = news
-//                    viewDataSubject.onNext(vd)
-                } catch {
-                    print("error")
-                }
-
+            .subscribe { [unowned self] (news) in
+                self.dailyNews.append(news)
             } onError: { (error) in
                 print(error)
             }

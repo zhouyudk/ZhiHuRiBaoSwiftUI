@@ -19,8 +19,8 @@ import RxSwift
 
 enum API_PATH: String {
     case todayNews = "/news/latest"
-    case newsBeforeDate = "news/before/" //拼接20140618 查询该日前一天的news
-    case newsDetail = "news/" //拼接3977867 news id
+    case newsBeforeDate = "/news/before/" //拼接20140618 查询该日前一天的news
+    case newsDetail = "/news/" //拼接3977867 news id
 }
 
 class NetworkManager {
@@ -52,12 +52,23 @@ class NetworkManager {
         }
     }
 
-    func queryNewsBeforeDate(date: String) -> Single<[NewsModel]> {
+    func queryNewsBeforeDate(date: String) -> Single<DailyNewsModel> {
         return Single.create { [unowned self](single) -> Disposable in
             let request = AF
                 .request(self.host+API_PATH.newsBeforeDate.rawValue+date)
             request
                 .responseJSON { response in
+                    switch response.result {
+                    case let .success(json):
+                        if let news = DailyNewsModel.deserialize(from: json as? [String: Any]) {
+                            single(.success(news))
+                        } else {
+                            single(.error(RBErrors.parseJSONError("JSON 解析错误")))
+                        }
+                    case let .failure(error):
+                        single(.error(error))
+                        print(error)
+                    }
                     print(response.result)
                 }
             return Disposables.create {

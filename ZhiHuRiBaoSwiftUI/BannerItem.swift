@@ -18,6 +18,9 @@ struct BannerItem: View {
                 .onAppear(perform: {
                     fetchRemoteImage(url: itemData.image)
                 })
+                .onTapGesture(count: 1, perform: {
+                    remoteImage = nil
+                })
             VStack(alignment: .leading) {
                 Text(itemData.title)
                     .font(.title)
