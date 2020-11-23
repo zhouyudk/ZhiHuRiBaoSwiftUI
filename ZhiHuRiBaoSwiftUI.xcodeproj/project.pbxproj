@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B532CD30256BB76E0083FE4E /* NewsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B532CD2F256BB76E0083FE4E /* NewsDetailView.swift */; };
 		B574847A255E3547003F238C /* BannerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5748479255E3547003F238C /* BannerItem.swift */; };
 		B58DF43E2567A64600435981 /* DailySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58DF43D2567A64600435981 /* DailySection.swift */; };
 		B58DF4412567ABAA00435981 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58DF4402567ABAA00435981 /* NewsModel.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B532CD2F256BB76E0083FE4E /* NewsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailView.swift; sourceTree = "<group>"; };
 		B5748479255E3547003F238C /* BannerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerItem.swift; sourceTree = "<group>"; };
 		B58DF43D2567A64600435981 /* DailySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySection.swift; sourceTree = "<group>"; };
 		B58DF4402567ABAA00435981 /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				B5BE0B49256B94AD00E30B62 /* RBErrors.swift */,
 				B5A5A002255CE58F00433D94 /* Fonts.swift */,
 				B5BE0B43256B4E7200E30B62 /* NetworkManager.swift */,
+				B532CD2F256BB76E0083FE4E /* NewsDetailView.swift */,
 				B5A59FF1255CE25E00433D94 /* Assets.xcassets */,
 				B5A59FF6255CE25E00433D94 /* Info.plist */,
 				B5A59FF3255CE25E00433D94 /* Preview Content */,
@@ -196,6 +199,7 @@
 				B574847A255E3547003F238C /* BannerItem.swift in Sources */,
 				B58DF4442567AC1E00435981 /* NewsViewModel.swift in Sources */,
 				B5A5A008255D08F200433D94 /* RiBaoHeader.swift in Sources */,
+				B532CD30256BB76E0083FE4E /* NewsDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

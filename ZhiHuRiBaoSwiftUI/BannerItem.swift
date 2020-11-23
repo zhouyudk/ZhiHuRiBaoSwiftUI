@@ -10,6 +10,7 @@ import SwiftUI
 struct BannerItem: View {
     @ObservedObject var itemData: TopNewsModel
     @State private var remoteImage: UIImage? = nil
+    @State private var showPopover: Bool = false
     var body: some View {
         ZStack(alignment: .bottomLeading) {
             Image(uiImage: remoteImage ?? UIImage(named: "haitun")!)
@@ -19,7 +20,10 @@ struct BannerItem: View {
                     fetchRemoteImage(url: itemData.image)
                 })
                 .onTapGesture(count: 1, perform: {
-                    remoteImage = nil
+                    showPopover = true
+                })
+                .popover(isPresented: self.$showPopover, content: {
+                    NewsDetailView()
                 })
             VStack(alignment: .leading) {
                 Text(itemData.title)
