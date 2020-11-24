@@ -20,6 +20,15 @@
         }
       },
       {
+        "package": "Refresh",
+        "repositoryURL": "https://github.com/wxxsw/Refresh",
+        "state": {
+          "branch": "master",
+          "revision": "05a4667b8250c7cce0156882bf6385a5108ae6f0",
+          "version": null
+        }
+      },
+      {
         "package": "RxSwift",
         "repositoryURL": "https://github.com/ReactiveX/RxSwift.git",
         "state": {

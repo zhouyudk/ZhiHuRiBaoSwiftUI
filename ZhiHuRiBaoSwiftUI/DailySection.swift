@@ -12,8 +12,10 @@ struct DailySection: View {
     var body: some View {
         Section(header: DailySectionHeader(dateStr: sectionData.date)) {
             VStack {
-                ForEach(0..<sectionData.stories.count) { i in
-                    DailySectionItem(viewData: sectionData.stories[i])
+                ForEach(sectionData.stories, id:\.id) { news in
+                    NavigationLink(destination: NewsDetailView()) {
+                        DailySectionItem(viewData: news)
+                    }
                 }
             }
         }

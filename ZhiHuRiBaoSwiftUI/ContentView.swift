@@ -7,29 +7,46 @@
 
 import SwiftUI
 import RxSwift
+import Refresh
 
 struct ContentView: View {
     let disposeBag = DisposeBag()
     @ObservedObject var viewModel = NewsViewModel()
     var body: some View {
-        VStack {
-            RiBaoHeader(viewData: HeaderViewData())
-                .padding(.all, 0)
-            ScrollView {
-                VStack {
-                    RiBaoBanner(todayNews: viewModel.todayNews)
-                    ForEach(viewModel.dailyNews, id: \.date) { daily in
-                        DailySection(sectionData: daily)
+        NavigationView() {
+            VStack {
+                RiBaoHeader(viewData: HeaderViewData())
+                    .padding(.all, 0)
+                GeometryReader(content: { geometry in
+                    ScrollView {
+                        Text("\(geometry.size.height)")
+                        LazyVStack {
+                            RiBaoBanner(todayNews: viewModel.todayNews)
+                            ForEach(viewModel.dailyNews, id: \.date) { daily in
+                                DailySection(sectionData: daily)
+                            }
+                            RefreshFooter(refreshing: $viewModel.refreshStatus.footerRefreshing, action: {
+                                viewModel.queryDailyNews()
+                            }) {
+                                if viewModel.refreshStatus.noMore {
+                                    Text("No more data !")
+                                } else {
+                                    Text("refreshing...")
+                                }
+                            }
+                            .noMore(viewModel.refreshStatus.noMore)
+                            .preload(offset: 50)
+                        }
+                        .padding(.all, 0)
                     }
-                    Spacer()
-                }
-                .padding(.all, 0)
+                    .enableRefresh()
+                })
             }
-
+            .navigationBarHidden(true)
         }
-        .onAppear(perform: {
-            viewModel.queryTodayNews()
-        })
+    }
+    init() {
+        viewModel.queryTodayNews()
     }
 }
 
