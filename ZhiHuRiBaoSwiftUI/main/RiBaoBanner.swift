@@ -9,14 +9,11 @@ import SwiftUI
 
 struct RiBaoBanner: View {
     @ObservedObject var todayNews: TodayNewsModel
+    @State var index = 0
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(alignment: .center, spacing: 0) {
-                ForEach(todayNews.top_stories, id: \.id) { news in
-                    BannerItem(itemData: news)
-                }
-            }
-        }
+        SwiftUIPagerView(index: $index, pages: todayNews.top_stories.map({
+            BannerItem(itemData: $0, id: $0.id)
+        }))
         .frame(width: UIScreen.screenWidth, height: 400)
     }
 }

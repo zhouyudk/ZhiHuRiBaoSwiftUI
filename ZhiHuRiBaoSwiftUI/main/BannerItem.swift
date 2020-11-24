@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-struct BannerItem: View {
+struct BannerItem: View, Identifiable {
     @ObservedObject var itemData: TopNewsModel
     @State private var remoteImage: UIImage? = nil
     @State private var showPopover: Bool = false
+    var id: Int
     var body: some View {
         ZStack(alignment: .bottomLeading) {
             Image(uiImage: remoteImage ?? UIImage(named: "haitun")!)
@@ -59,6 +60,6 @@ struct BannerItem: View {
 
 struct BannerItem_Previews: PreviewProvider {
     static var previews: some View {
-        BannerItem(itemData: TopNewsModel())
+        BannerItem(itemData: TopNewsModel(), id: 1)
     }
 }

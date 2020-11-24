@@ -45,7 +45,7 @@ class TodayNewsModel: HandyJSON, ObservableObject {
     }
 }
 
-class DailyNewsModel: HandyJSON, ObservableObject {
+class DailyNewsModel: HandyJSON, ObservableObject, Identifiable {
     var date: String = ""
     var stories: [NewsModel] = [NewsModel()]
     required init() {
