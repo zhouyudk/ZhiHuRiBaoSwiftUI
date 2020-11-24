@@ -46,6 +46,10 @@ class NewsViewModel: ObservableObject {
             .observeOn(MainScheduler.instance)
             .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
             .subscribe { [unowned self] (news) in
+                if let date = df.date(from: news.date) {
+                    df.dateFormat = "MM月dd"
+                    news.date = df.string(from: date)
+                }
                 self.dailyNews.append(news)
                 self.beforeDays += 1
                 self.refreshStatus = RefreshStatus(footerRefreshing: false, noMore: false)
@@ -55,11 +59,13 @@ class NewsViewModel: ObservableObject {
             .disposed(by: disposeBag)
     }
 }
+
 struct RefreshStatus {
     var footerRefreshing = false
     var noMore = false
     var headerRefreshing = false
 }
+
 struct ViewData {
     var topNews: [TopNewsModel]
     var dailyNews: [DailyNewsModel]

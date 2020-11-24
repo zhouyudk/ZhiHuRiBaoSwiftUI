@@ -18,6 +18,11 @@ class NewsModel: HandyJSON, ObservableObject {
     required init() {
 
     }
+
+    init(images: [String], title: String) {
+        self.images = images
+        self.title = title
+    }
 }
 
 class TopNewsModel: HandyJSON, ObservableObject {

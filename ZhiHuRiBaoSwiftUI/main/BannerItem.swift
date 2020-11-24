@@ -23,7 +23,7 @@ struct BannerItem: View {
                     showPopover = true
                 })
                 .popover(isPresented: self.$showPopover, content: {
-                    NewsDetailView()
+                    return NewsDetailView(newsModel: NewsModel(images: [itemData.image], title: itemData.title))
                 })
             VStack(alignment: .leading) {
                 Text(itemData.title)

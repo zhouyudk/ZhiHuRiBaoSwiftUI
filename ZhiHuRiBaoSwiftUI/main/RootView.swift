@@ -15,8 +15,7 @@ struct RootView: View {
     var body: some View {
         NavigationView() {
             VStack {
-                RiBaoHeader(viewData: HeaderViewData())
-                    .padding(.all, 0)
+                RiBaoHeader()
                 ScrollView {
                     LazyVStack {
                         RiBaoBanner(todayNews: viewModel.todayNews)

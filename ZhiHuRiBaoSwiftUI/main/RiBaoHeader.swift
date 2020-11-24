@@ -36,7 +36,17 @@ struct RiBaoHeader: View {
             .frame(minWidth: 0, idealWidth: UIScreen.screenWidth, maxWidth: .infinity, minHeight: 40, idealHeight: 40, maxHeight: 40, alignment: .top)
             .padding(.horizontal, 10)
         }
-        
+        .padding(.all, 0)
+        .onAppear(perform: showTodayDate)
+    }
+
+    private func showTodayDate() {
+        let df = DateFormatter()
+        df.dateFormat = "MM"
+        let month = df.string(from: Date())
+        df.dateFormat = "dd"
+        let day = df.string(from: Date())
+        viewData = HeaderViewData(month: "\(month)月", day: "\(day)")
     }
 }
 

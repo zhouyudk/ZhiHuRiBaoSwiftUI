@@ -13,7 +13,7 @@ struct DailySection: View {
         Section(header: DailySectionHeader(dateStr: sectionData.date)) {
             VStack {
                 ForEach(sectionData.stories, id:\.id) { news in
-                    NavigationLink(destination: NewsDetailView()) {
+                    NavigationLink(destination: NewsDetailView(newsModel: news)) {
                         DailySectionItem(viewData: news)
                     }
                 }
@@ -32,6 +32,7 @@ struct DailySectionHeader: View {
         } else {
             HStack(alignment: .center) {
                 Text(dateStr)
+                    .font(.headline)
                     .foregroundColor(.gray)
                     .padding(.horizontal, 10)
                 VStack {
@@ -48,20 +49,17 @@ struct DailySectionItem: View {
     @State private var remoteImage: UIImage? = nil
     var body: some View {
         HStack(alignment: .center) {
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 5) {
                 Text(viewData.title)
-                    .font(.title2)
+                    .font(.body)
                     .fontWeight(.medium)
                     .foregroundColor(Color.black)
                     .multilineTextAlignment(.leading)
                     .lineLimit(2)
-
-                HStack(alignment: .center) {
-                    Text(viewData.hint)
-                        .font(.primaryTextSize)
-                        .foregroundColor(.gray)
-                        .multilineTextAlignment(.leading)
-                }
+                Text(viewData.hint)
+                    .font(.primaryTextSize)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.leading)
             }
             .frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .topLeading)
             Spacer(minLength: 10)
@@ -72,8 +70,8 @@ struct DailySectionItem: View {
                     fetchRemoteImage(url: viewData.images.first ?? "")
                 })
         }
-        .padding(.horizontal, 10)
-        .frame(width: UIScreen.screenWidth, height: 80, alignment: .center)
+        .padding(EdgeInsets(top: 30, leading: 10, bottom: 40, trailing: 10))
+        .frame(width: UIScreen.screenWidth, height: 100, alignment: .center)
     }
 
     func fetchRemoteImage(url: String){
@@ -93,6 +91,7 @@ struct DailySectionItem: View {
 
 struct DailySection_Previews: PreviewProvider {
     static var previews: some View {
-        DailySection(sectionData: DailyNewsModel())
+//        DailySection(sectionData: DailyNewsModel())
+        DailySectionHeader()
     }
 }

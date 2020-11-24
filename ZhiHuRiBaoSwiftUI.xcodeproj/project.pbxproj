@@ -15,7 +15,7 @@
 		B58DF4442567AC1E00435981 /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58DF4432567AC1E00435981 /* NewsViewModel.swift */; };
 		B58DF44F2567BF8000435981 /* HandyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = B58DF44E2567BF8000435981 /* HandyJSON */; };
 		B5A59FEE255CE25C00433D94 /* ZhiHuRiBaoSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A59FED255CE25C00433D94 /* ZhiHuRiBaoSwiftUIApp.swift */; };
-		B5A59FF0255CE25C00433D94 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A59FEF255CE25C00433D94 /* ContentView.swift */; };
+		B5A59FF0255CE25C00433D94 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A59FEF255CE25C00433D94 /* RootView.swift */; };
 		B5A59FF2255CE25E00433D94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A59FF1255CE25E00433D94 /* Assets.xcassets */; };
 		B5A59FF5255CE25E00433D94 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A59FF4255CE25E00433D94 /* Preview Assets.xcassets */; };
 		B5A59FFF255CE39700433D94 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A59FFE255CE39700433D94 /* Extensions.swift */; };
@@ -36,7 +36,7 @@
 		B58DF4432567AC1E00435981 /* NewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewModel.swift; sourceTree = "<group>"; };
 		B5A59FEA255CE25C00433D94 /* ZhiHuRiBaoSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhiHuRiBaoSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5A59FED255CE25C00433D94 /* ZhiHuRiBaoSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZhiHuRiBaoSwiftUIApp.swift; sourceTree = "<group>"; };
-		B5A59FEF255CE25C00433D94 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B5A59FEF255CE25C00433D94 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		B5A59FF1255CE25E00433D94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5A59FF4255CE25E00433D94 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B5A59FF6255CE25E00433D94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -63,6 +63,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B532CD37256CE6D50083FE4E /* main */ = {
+			isa = PBXGroup;
+			children = (
+				B5A59FEF255CE25C00433D94 /* RootView.swift */,
+				B5A5A007255D08F200433D94 /* RiBaoHeader.swift */,
+				B5748479255E3547003F238C /* BannerItem.swift */,
+				B5F244BF255D125400E53166 /* RiBaoBanner.swift */,
+				B58DF43D2567A64600435981 /* DailySection.swift */,
+				B58DF4432567AC1E00435981 /* NewsViewModel.swift */,
+			);
+			path = main;
+			sourceTree = "<group>";
+		};
+		B532CD39256CEDE00083FE4E /* NewDetail */ = {
+			isa = PBXGroup;
+			children = (
+				B532CD2F256BB76E0083FE4E /* NewsDetailView.swift */,
+			);
+			path = NewDetail;
+			sourceTree = "<group>";
+		};
 		B5A59FE1255CE25B00433D94 = {
 			isa = PBXGroup;
 			children = (
@@ -83,18 +104,13 @@
 			isa = PBXGroup;
 			children = (
 				B5A59FED255CE25C00433D94 /* ZhiHuRiBaoSwiftUIApp.swift */,
-				B5A59FEF255CE25C00433D94 /* ContentView.swift */,
-				B5A5A007255D08F200433D94 /* RiBaoHeader.swift */,
-				B5F244BF255D125400E53166 /* RiBaoBanner.swift */,
-				B5748479255E3547003F238C /* BannerItem.swift */,
-				B58DF43D2567A64600435981 /* DailySection.swift */,
-				B58DF4432567AC1E00435981 /* NewsViewModel.swift */,
+				B532CD37256CE6D50083FE4E /* main */,
 				B58DF4402567ABAA00435981 /* NewsModel.swift */,
+				B532CD39256CEDE00083FE4E /* NewDetail */,
 				B5A59FFE255CE39700433D94 /* Extensions.swift */,
 				B5BE0B49256B94AD00E30B62 /* RBErrors.swift */,
 				B5A5A002255CE58F00433D94 /* Fonts.swift */,
 				B5BE0B43256B4E7200E30B62 /* NetworkManager.swift */,
-				B532CD2F256BB76E0083FE4E /* NewsDetailView.swift */,
 				B5A59FF1255CE25E00433D94 /* Assets.xcassets */,
 				B5A59FF6255CE25E00433D94 /* Info.plist */,
 				B5A59FF3255CE25E00433D94 /* Preview Content */,
@@ -192,7 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5A5A003255CE58F00433D94 /* Fonts.swift in Sources */,
-				B5A59FF0255CE25C00433D94 /* ContentView.swift in Sources */,
+				B5A59FF0255CE25C00433D94 /* RootView.swift in Sources */,
 				B5A59FEE255CE25C00433D94 /* ZhiHuRiBaoSwiftUIApp.swift in Sources */,
 				B5F244C0255D125400E53166 /* RiBaoBanner.swift in Sources */,
 				B5BE0B44256B4E7200E30B62 /* NetworkManager.swift in Sources */,
