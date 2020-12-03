@@ -16,6 +16,8 @@ struct SwiftUIPagerView<Content: View & Identifiable>: View {
     // 1
     var pages: [Content]
 
+    var indexChangeClosure: ((Int)->Void)?
+
     var body: some View {
         GeometryReader { geometry in
             ScrollView(.horizontal, showsIndicators: false) {
@@ -46,8 +48,14 @@ struct SwiftUIPagerView<Content: View & Identifiable>: View {
                 withAnimation { self.offset = -geometry.size.width * CGFloat(self.index) }
                 // 7
                 DispatchQueue.main.async { self.isGestureActive = false }
+//                indexChangeClosure?(self.index)
             }))
         }
+    }
+
+    mutating func onIndexChange(_ change: @escaping (Int)->Void) -> SwiftUIPagerView  {
+        indexChangeClosure = change
+        return self
     }
 }
 

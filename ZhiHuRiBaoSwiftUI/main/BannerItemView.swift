@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BannerItem: View, Identifiable {
+struct BannerItemView: View, Identifiable {
     @ObservedObject var itemData: TopNewsModel
     @State private var remoteImage: UIImage? = nil
     @State private var showPopover: Bool = false
@@ -60,6 +60,6 @@ struct BannerItem: View, Identifiable {
 
 struct BannerItem_Previews: PreviewProvider {
     static var previews: some View {
-        BannerItem(itemData: TopNewsModel(), id: 1)
+        BannerItemView(itemData: TopNewsModel(), id: 1)
     }
 }

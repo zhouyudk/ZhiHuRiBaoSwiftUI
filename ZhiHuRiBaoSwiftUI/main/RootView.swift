@@ -18,7 +18,7 @@ struct RootView: View {
                 RiBaoHeader()
                 ScrollView {
                     LazyVStack {
-                        RiBaoBanner(todayNews: viewModel.todayNews)
+                        RiBaoBanner(contents: viewModel.topNews.map{BannerItemView(itemData: $0, id: $0.id)})
                         ForEach(viewModel.dailyNews, id: \.date) { daily in
                             DailySection(sectionData: daily)
                         }

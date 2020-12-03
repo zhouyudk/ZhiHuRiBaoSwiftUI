@@ -12,6 +12,7 @@ class NewsViewModel: ObservableObject {
     @Published var topNews = [TopNewsModel]()
     @Published var dailyNews = [DailyNewsModel]()
     @Published var todayNews = TodayNewsModel()
+    @Published var topNewsCount: Int = 0
     @Published var refreshStatus = RefreshStatus()
     var noMoreDataSubject = BehaviorSubject(value: false)
     var beforeDays = 0
@@ -29,6 +30,7 @@ class NewsViewModel: ObservableObject {
                 tn.stories = todayNews.stories
                 self.dailyNews.append(contentsOf: [tn])
                 self.todayNews = todayNews
+                self.topNewsCount = todayNews.top_stories.count
                 self.queryDailyNews()
             } onError: { (error) in
                 print(error)
