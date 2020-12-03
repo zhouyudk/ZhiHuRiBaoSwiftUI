@@ -48,7 +48,6 @@ struct CarouselView<Content: View & Identifiable>: View {
                 // 修改是否拖拽状态
                 DispatchQueue.main.async { self.isGestureActive = false }
                 carouselHelper.enableAutoScroll()
-//                indexChangeClosure?(carouselHelper.index)
             }))
         }
         .onAppear(perform: {
@@ -76,12 +75,13 @@ class CarouselHelper: ObservableObject {
     private var scrollTimer: Timer?
 
     init(index: Int, itemsCount: Int) {
+        guard itemsCount > 1 else { return }
         self.itemsCount = itemsCount+2
         self.index = index+1
         enableAutoScroll()
     }
     func enableAutoScroll() {
-        let t = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { [self] (_) in
+        let t = Timer.scheduledTimer(withTimeInterval: 4, repeats: true) { [self] (_) in
             guard itemsCount > 1 else {
                 return
             }

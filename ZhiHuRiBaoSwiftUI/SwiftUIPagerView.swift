@@ -48,14 +48,8 @@ struct SwiftUIPagerView<Content: View & Identifiable>: View {
                 withAnimation { self.offset = -geometry.size.width * CGFloat(self.index) }
                 // 7
                 DispatchQueue.main.async { self.isGestureActive = false }
-//                indexChangeClosure?(self.index)
             }))
         }
-    }
-
-    mutating func onIndexChange(_ change: @escaping (Int)->Void) -> SwiftUIPagerView  {
-        indexChangeClosure = change
-        return self
     }
 }
 
