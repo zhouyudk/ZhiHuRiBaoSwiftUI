@@ -57,7 +57,6 @@ class NewsViewModel: ObservableObject {
             .disposed(by: disposeBag)
     }
 }
-
 struct RefreshStatus {
     var footerRefreshing = false
     var noMore = false

@@ -13,7 +13,7 @@ struct DailySection: View {
         Section(header: DailySectionHeader(dateStr: sectionData.date)) {
             VStack {
                 ForEach(sectionData.stories, id:\.id) { news in
-                    NavigationLink(destination: NewsDetailView(newsModel: news)) {
+                    NavigationLink(destination: NewsDetailView(news: news)) {
                         DailySectionItem(viewData: news)
                     }
                 }

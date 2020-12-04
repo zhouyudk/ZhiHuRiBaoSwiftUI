@@ -44,7 +44,7 @@ struct RiBaoHeader: View {
         let df = DateFormatter()
         df.dateFormat = "MM"
         let month = df.string(from: Date())
-        df.dateFormat = "dd"
+        df.dateFormat = "d"
         let day = df.string(from: Date())
         viewData = HeaderViewData(month: "\(month)月", day: "\(day)")
     }

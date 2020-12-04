@@ -28,6 +28,8 @@
 		B5BE0B44256B4E7200E30B62 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BE0B43256B4E7200E30B62 /* NetworkManager.swift */; };
 		B5BE0B4A256B94AD00E30B62 /* RBErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BE0B49256B94AD00E30B62 /* RBErrors.swift */; };
 		B5F244C0255D125400E53166 /* RiBaoBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F244BF255D125400E53166 /* RiBaoBanner.swift */; };
+		B5FE6CD32578EC0B004B3CE9 /* NewsDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE6CD22578EC0A004B3CE9 /* NewsDetailViewModel.swift */; };
+		B5FE6CD62578ED3E004B3CE9 /* NewsDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE6CD52578ED3E004B3CE9 /* NewsDetailModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		B5BE0B43256B4E7200E30B62 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		B5BE0B49256B94AD00E30B62 /* RBErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RBErrors.swift; sourceTree = "<group>"; };
 		B5F244BF255D125400E53166 /* RiBaoBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiBaoBanner.swift; sourceTree = "<group>"; };
+		B5FE6CD22578EC0A004B3CE9 /* NewsDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewModel.swift; sourceTree = "<group>"; };
+		B5FE6CD52578ED3E004B3CE9 /* NewsDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,8 @@
 			isa = PBXGroup;
 			children = (
 				B532CD2F256BB76E0083FE4E /* NewsDetailView.swift */,
+				B5FE6CD22578EC0A004B3CE9 /* NewsDetailViewModel.swift */,
+				B5FE6CD52578ED3E004B3CE9 /* NewsDetailModel.swift */,
 			);
 			path = NewDetail;
 			sourceTree = "<group>";
@@ -213,11 +219,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5FE6CD32578EC0B004B3CE9 /* NewsDetailViewModel.swift in Sources */,
 				B5A5A003255CE58F00433D94 /* Fonts.swift in Sources */,
 				B5A59FF0255CE25C00433D94 /* RootView.swift in Sources */,
 				B5A59FEE255CE25C00433D94 /* ZhiHuRiBaoSwiftUIApp.swift in Sources */,
 				B5F244C0255D125400E53166 /* RiBaoBanner.swift in Sources */,
 				B532CD3C256D058B0083FE4E /* SwiftUIPagerView.swift in Sources */,
+				B5FE6CD62578ED3E004B3CE9 /* NewsDetailModel.swift in Sources */,
 				B5BE0B44256B4E7200E30B62 /* NetworkManager.swift in Sources */,
 				B5A59FFF255CE39700433D94 /* Extensions.swift in Sources */,
 				B5BE0B4A256B94AD00E30B62 /* RBErrors.swift in Sources */,

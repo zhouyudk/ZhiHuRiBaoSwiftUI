@@ -99,7 +99,6 @@ class CarouselHelper: ObservableObject {
     }
 
     func updateIndex(_ index: Int) {
-        print(index)
         // 先动画滚动到index，再判断index是否为边界
         withAnimation {
             self.index = index

@@ -77,12 +77,24 @@ class NetworkManager {
         }
     }
 
-    func queryNewsDetail(newsId: String) -> Single<NewsModel> {
+    func queryNewsDetail(newsId: Int) -> Single<NewsDetailModel> {
         return Single.create { [unowned self](single) -> Disposable in
             let request = AF
-                .request(self.host+API_PATH.newsDetail.rawValue+newsId)
+                .request(self.host+API_PATH.newsDetail.rawValue+"\(newsId)")
             request
                 .responseJSON { response in
+                    print(response.result)
+                    switch response.result {
+                    case let .success(json):
+                        if let news = NewsDetailModel.deserialize(from: json as? [String: Any]) {
+                            single(.success(news))
+                        } else {
+                            single(.error(RBErrors.parseJSONError("JSON 解析错误")))
+                        }
+                    case let .failure(error):
+                        single(.error(error))
+                        print(error)
+                    }
                     print(response.result)
                 }
             return Disposables.create {

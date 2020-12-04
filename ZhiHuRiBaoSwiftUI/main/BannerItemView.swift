@@ -13,19 +13,17 @@ struct BannerItemView: View, Identifiable {
     @State private var showPopover: Bool = false
     var id: Int
     var body: some View {
+
+
         ZStack(alignment: .bottomLeading) {
-            Image(uiImage: remoteImage ?? UIImage(named: "haitun")!)
-                .resizable()
-                .frame(width: UIScreen.screenWidth, height: 400)
-                .onAppear(perform: {
-                    fetchRemoteImage(url: itemData.image)
-                })
-                .onTapGesture(count: 1, perform: {
-                    showPopover = true
-                })
-                .popover(isPresented: self.$showPopover, content: {
-                    return NewsDetailView(newsModel: NewsModel(images: [itemData.image], title: itemData.title))
-                })
+            NavigationLink(destination:  NewsDetailView(news: NewsModel(images: [itemData.image], title: itemData.title))){
+                Image(uiImage: remoteImage ?? UIImage(named: "haitun")!)
+                    .resizable()
+                    .frame(width: UIScreen.screenWidth, height: 400)
+                    .onAppear(perform: {
+                        fetchRemoteImage(url: itemData.image)
+                    })
+            }
             VStack(alignment: .leading) {
                 Text(itemData.title)
                     .font(.title)

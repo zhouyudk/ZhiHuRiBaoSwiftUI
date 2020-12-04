@@ -10,13 +10,12 @@ import RxSwift
 import Refresh
 
 struct RootView: View {
-    let disposeBag = DisposeBag()
     @ObservedObject var viewModel = NewsViewModel()
     var body: some View {
         NavigationView() {
             VStack {
                 RiBaoHeader()
-                ScrollView {
+                ScrollView(.vertical, showsIndicators: false) {
                     LazyVStack {
                         RiBaoBanner(todayNews: viewModel.todayNews)
                         ForEach(viewModel.dailyNews, id: \.date) { daily in
