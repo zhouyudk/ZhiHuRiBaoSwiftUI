@@ -27,7 +27,7 @@ struct RootView: View {
                             if viewModel.refreshStatus.noMore {
                                 Text("No more data !")
                             } else {
-                                Text("refreshing...")
+                                Text("loading more...")
                             }
                         }
                         .noMore(viewModel.refreshStatus.noMore)

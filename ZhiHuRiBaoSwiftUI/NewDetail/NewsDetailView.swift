@@ -61,7 +61,7 @@ struct NewsDetailView: View {
 
     func fetchRemoteImage(url: String){
         guard let url = URL(string: url) else { return }
-        URLSession.shared.dataTask(with: url){ (data, response, error) in
+        URLSession.shared.dataTask(with: url){ [self] (data, response, error) in
             if let d = data, let image = UIImage(data: d){
                 self.remoteImage = image
             }
