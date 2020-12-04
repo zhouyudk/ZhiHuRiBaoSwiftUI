@@ -9,11 +9,11 @@ import SwiftUI
 import WebKit
 
 struct NewsDetailView: View {
-    @ObservedObject var news: NewsModel
     @ObservedObject private var viewModel = NewsDetailViewModel()
     @State private var remoteImage: UIImage? = nil
     @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
     @ObservedObject private var webHelper = WebViewHelper()
+    var news: NewsModel
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {

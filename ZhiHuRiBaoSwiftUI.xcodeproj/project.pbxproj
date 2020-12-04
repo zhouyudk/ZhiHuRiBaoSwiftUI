@@ -74,6 +74,7 @@
 		B532CD37256CE6D50083FE4E /* main */ = {
 			isa = PBXGroup;
 			children = (
+				B58DF4402567ABAA00435981 /* NewsModel.swift */,
 				B5A59FEF255CE25C00433D94 /* RootView.swift */,
 				B5A5A007255D08F200433D94 /* RiBaoHeader.swift */,
 				B5748479255E3547003F238C /* BannerItemView.swift */,
@@ -115,7 +116,6 @@
 			children = (
 				B5A59FED255CE25C00433D94 /* ZhiHuRiBaoSwiftUIApp.swift */,
 				B532CD37256CE6D50083FE4E /* main */,
-				B58DF4402567ABAA00435981 /* NewsModel.swift */,
 				B532CD39256CEDE00083FE4E /* NewDetail */,
 				B5A59FFE255CE39700433D94 /* Extensions.swift */,
 				B516E96825764D60007B0823 /* CarouselView.swift */,
