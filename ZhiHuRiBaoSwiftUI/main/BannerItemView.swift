@@ -14,7 +14,6 @@ struct BannerItemView: View, Identifiable {
     var id: Int
     var body: some View {
 
-
         ZStack(alignment: .bottomLeading) {
             NavigationLink(destination:  NewsDetailView(news: NewsModel(images: [itemData.image], title: itemData.title))){
                 Image(uiImage: remoteImage ?? UIImage(named: "haitun")!)

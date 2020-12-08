@@ -15,47 +15,56 @@ struct NewsDetailView: View {
     @ObservedObject private var webHelper = WebViewHelper()
     var news: NewsModel
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading) {
-                ZStack(alignment: .bottomLeading) {
-                    Image(uiImage: remoteImage ?? UIImage(named: "haitun")!)
-                        .resizable()
-                        .frame(width: UIScreen.screenWidth, height: 400)
-                        .onAppear(perform: {
-                            fetchRemoteImage(url: news.images.first!)
-                        })
-                    Text("点击这里返回").frame(width: 300, height: 300, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                    HStack {
-                        LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0), Color.black.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
-//                        RadialGradient(gradient: Gradient(colors: [.blue, .black]), center: .center, startRadius: 20, endRadius: 200)
-//                                    AngularGradient(gradient: Gradient(colors: [.red, .yellow, .green, .blue, .purple, .red]), center: .center)
-                    }
-                    .frame(height: 200)
+        ZStack {
+            ScrollView {
+                VStack(alignment: .leading) {
+                    ZStack(alignment: .bottomLeading) {
+                        Image(uiImage: remoteImage ?? UIImage(named: "haitun")!)
+                            .resizable()
+                            .frame(width: UIScreen.screenWidth, height: 400)
+                            .onAppear(perform: {
+                                fetchRemoteImage(url: news.images.first!)
+                            })
+                        Text("点击这里返回").frame(width: 300, height: 300, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        HStack {
+                            LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0), Color.black.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
+                        }
+                        .frame(height: 200)
 
-                    VStack(alignment: .leading) {
-                        Text(news.title)
-                            .font(.title)
-                            .fontWeight(.medium)
-                            .foregroundColor(Color.white)
-                            .multilineTextAlignment(.leading)
-                            .lineLimit(2)
+                        VStack(alignment: .leading) {
+                            Text(news.title)
+                                .font(.title)
+                                .fontWeight(.medium)
+                                .foregroundColor(Color.white)
+                                .multilineTextAlignment(.leading)
+                                .lineLimit(2)
+                        }
+                        .padding(EdgeInsets(top: 0, leading: 20, bottom: 40, trailing: 0))
                     }
-                    .padding(EdgeInsets(top: 0, leading: 20, bottom: 40, trailing: 0))
+                    .onTapGesture(count: 1, perform: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    })
+
+                    DetailTextView(text: viewModel.newsDetail.body, webViewHelper: webHelper)
+                        .frame(width: UIScreen.screenWidth-30, height: webHelper.webHeight, alignment: .center)
+                        .padding(.horizontal, 15)
                 }
-                .onTapGesture(count: 1, perform: {
-                    self.presentationMode.wrappedValue.dismiss()
-                })
+            }
+            .onAppear(perform: {
+                viewModel.fetchNewsDetail(id: news.id)
+            })
 
-                DetailTextView(text: viewModel.newsDetail.body, webViewHelper: webHelper)
-                    .frame(width: UIScreen.screenWidth-30, height: webHelper.webHeight, alignment: .center)
-                    .padding(.horizontal, 15)
+            if (webHelper.showGalleryView) {
+                GalleryView(index: webHelper.galleryIndex, source: webHelper.imagesSrc)
+                    .onTapGesture(count: 1, perform: {
+                        webHelper.showGalleryView = false
+                    })
+                    .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight, alignment: .center)
             }
         }
         .ignoresSafeArea()
         .navigationBarHidden(true)
-        .onAppear(perform: {
-            viewModel.fetchNewsDetail(id: news.id)
-        })
+
 
     }
 
@@ -82,14 +91,8 @@ struct DetailTextView: UIViewRepresentable {
     typealias UIViewType = WKWebView
     var text: String = ""
     var webViewHelper: WebViewHelper
-    func makeUIView(context: Context) -> WKWebView {
-        return WKWebView()
-    }
-    func updateUIView(_ uiView: WKWebView, context: Context) {
-        uiView.navigationDelegate = webViewHelper
-        uiView.scrollView.isScrollEnabled = false
-        // 格式化Html
-        let htmlString = String(format: """
+
+    private let formatHtml = """
                                 <html> \n
                                 <head> \n
                                 <style type=\"text/css\"> \n
@@ -105,22 +108,83 @@ struct DetailTextView: UIViewRepresentable {
                                 </script>%@
                                 </body>
                                 </html>
-                                """, text)
+                                """
+    func makeUIView(context: Context) -> WKWebView {
+        return WKWebView()
+    }
+    func updateUIView(_ uiView: WKWebView, context: Context) {
+        uiView.navigationDelegate = webViewHelper
+        uiView.scrollView.isScrollEnabled = false
+        // 格式化Html
+        let htmlString = String(format: formatHtml, text)
         //在window.onload方法中调整图片宽高等
-//        var $img = document.getElementsByTagName('img');\n
-//        for(var p in  $img){\n
-//        $img[p].style.width = '100%%';\n
-//        $img[p].style.height ='auto'\n
-//        let height = document.body.offsetHeight;\n
-//        window.webkit.messageHandlers.imagLoaded.postMessage(height);\n
-//        }\n
+        //        var $img = document.getElementsByTagName('img');\n
+        //        for(var p in  $img){\n
+        //        $img[p].style.width = '100%%';\n
+        //        $img[p].style.height ='auto'\n
+        //        let height = document.body.offsetHeight;\n
+        //        window.webkit.messageHandlers.imagLoaded.postMessage(height);\n
+        //        }\n
         uiView.loadHTMLString(htmlString, baseURL: nil)
     }
 }
 
+//https://blog.csdn.net/xiaoxiaobaibaicai/article/details/103274710 为图片添加点击事件
 class WebViewHelper: UIView, WKNavigationDelegate, ObservableObject {
     @Published var webHeight: CGFloat = 500
-//   web加载完成后获取高度
+    @Published var imagesSrc: [String] = []
+    @Published var showGalleryView = false
+    @Published var galleryIndex = 0
+    private let jsGetImages = """
+                function getImages(){\
+                    var objs = document.getElementsByTagName(\"img\");\
+                    var imgScr = '';\
+                    for(var i=0;i<objs.length;i++){\
+                    imgScr = imgScr + objs[i].src + '+';\
+                    };\
+                    return imgScr;\
+                };
+                """
+
+    private let jsClickImages = """
+                function registerImageClickAction(){\
+                    var imgs=document.getElementsByTagName('img');\
+                    var length=imgs.length;\
+                    for(var i=0;i<length;i++){\
+                    img=imgs[i];\
+                    img.onclick=function(){\
+                    window.location.href='image-preview:'+this.src}\
+                    }\
+                }
+                """
+
+//    init(clickImageClosure: @escaping (String)->Void) {
+//        super.init(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
+//        self.clickImageClosure = clickImageClosure
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        super.init(coder: coder)
+//    }
+
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if navigationAction.request.url?.scheme == "image-preview" {
+            let urlStrTmp = navigationAction.request.url?.absoluteString ?? ""
+            let range = urlStrTmp.range(of: "image-preview:")
+            let urlStr = urlStrTmp[range!.upperBound...]
+            if let index = imagesSrc.firstIndex(of: String(urlStr)) {
+                withAnimation {
+                    showGalleryView = true
+                    galleryIndex = index
+                }
+            }
+            print(urlStr)
+            decisionHandler(WKNavigationActionPolicy.cancel)
+        } else {
+            decisionHandler(WKNavigationActionPolicy.allow)
+        }
+    }
+    //   web加载完成后获取高度
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         //https://blog.csdn.net/MinggeQingchun/article/details/95087345 高度计算
         webView.evaluateJavaScript("document.body.scrollWidth") { [weak self ](result, error) in
@@ -135,7 +199,19 @@ class WebViewHelper: UIView, WKNavigationDelegate, ObservableObject {
                 }
             }
         }
+        //添加js方法
+        webView.evaluateJavaScript(jsGetImages, completionHandler: nil)
+        //执行js方法
+        webView.evaluateJavaScript("getImages()") { [weak self ](result, error) in
+            guard let self = self else { return }
+            if let images = result as? String {
+                self.imagesSrc = images.components(separatedBy: "+").filter{$0.count > 0}
+                print(self.imagesSrc)
+            }
+        }
 
+        webView.evaluateJavaScript(jsClickImages, completionHandler: nil)
+        webView.evaluateJavaScript("registerImageClickAction()", completionHandler: nil)
     }
 }
 
