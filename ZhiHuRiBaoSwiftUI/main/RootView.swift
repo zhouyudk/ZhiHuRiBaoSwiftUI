@@ -11,6 +11,7 @@ import Refresh
 
 struct RootView: View {
     @ObservedObject var viewModel = NewsViewModel()
+    @State private var offsetY: CGFloat = 0
     var body: some View {
         NavigationView() {
             VStack {

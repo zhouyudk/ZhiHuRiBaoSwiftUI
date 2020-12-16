@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct CarouselView<Content: View & Identifiable>: View {
+struct CarouselView<ItemView: View & Identifiable>: View {
     @EnvironmentObject var carouselHelper: CarouselHelper
     @State private var offset: CGFloat = 0
     @State private var isGestureActive: Bool = false
-    var pages: [Content]
+    var pages: [ItemView]
     var body: some View {
         GeometryReader { geometry in
             ScrollView(.horizontal, showsIndicators: false) {
@@ -57,7 +57,8 @@ struct CarouselView<Content: View & Identifiable>: View {
             carouselHelper.disableAutoScroll()
         })
     }
-    init(pages: [Content]) {
+    
+    init(pages: [ItemView]) {
         var newPages = pages
         if pages.count > 1 {
             let pageFirst = pages.first!

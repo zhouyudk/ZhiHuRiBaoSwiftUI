@@ -63,28 +63,12 @@ struct DailySectionItem: View {
             }
             .frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .topLeading)
             Spacer(minLength: 10)
-            Image(uiImage: remoteImage ?? UIImage(named: "haitun")!)
-                .resizable()
+            WebImage(imageUrl: viewData.images.first ?? "")
                 .frame(width: 80, height: 80, alignment: .center)
-                .onAppear(perform: {
-                    fetchRemoteImage(url: viewData.images.first ?? "")
-                })
         }
         .padding(EdgeInsets(top: 30, leading: 10, bottom: 40, trailing: 10))
         .frame(width: UIScreen.screenWidth, height: 100, alignment: .center)
     }
-
-    func fetchRemoteImage(url: String){
-            guard let url = URL(string: url) else { return }
-            URLSession.shared.dataTask(with: url){ (data, response, error) in
-                if let d = data, let image = UIImage(data: d){
-                    self.remoteImage = image
-                }
-                else{
-                    print(error ?? "")
-                }
-            }.resume()
-        }
 }
 
 

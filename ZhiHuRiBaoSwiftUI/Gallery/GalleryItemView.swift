@@ -10,29 +10,13 @@ import SwiftUI
 struct GalleryItemView: View, Identifiable {
     var id: String
     var imageUrl: String
-
-    @State private var remoteImage: UIImage? = nil
     var body: some View {
+        ZStack {
+            WebImage(imageUrl: imageUrl)
+                .scaledToFit()
+                .frame(idealWidth: UIScreen.screenWidth, minHeight: 0, idealHeight: 100, maxHeight: .infinity, alignment: .center)
+        }
 
-        Image(uiImage: remoteImage ?? UIImage(named: "haitun")!)
-            .resizable()
-            .scaledToFit()
-            .frame(idealWidth: UIScreen.screenWidth, minHeight: 0, idealHeight: 100, maxHeight: .infinity, alignment: .center)
-            .onAppear(perform: {
-                fetchRemoteImage(url: imageUrl)
-            })
-    }
-
-    func fetchRemoteImage(url: String){
-        guard let url = URL(string: url) else { return }
-        URLSession.shared.dataTask(with: url){ [self] (data, response, error) in
-            if let d = data, let image = UIImage(data: d){
-                self.remoteImage = image
-            }
-            else{
-                print(error ?? "")
-            }
-        }.resume()
     }
 }
 

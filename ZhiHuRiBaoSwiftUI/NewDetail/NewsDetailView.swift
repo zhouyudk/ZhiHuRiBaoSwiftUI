@@ -19,12 +19,9 @@ struct NewsDetailView: View {
             ScrollView {
                 VStack(alignment: .leading) {
                     ZStack(alignment: .bottomLeading) {
-                        Image(uiImage: remoteImage ?? UIImage(named: "haitun")!)
-                            .resizable()
+                        WebImage(imageUrl: news.images.first ?? "")
                             .frame(width: UIScreen.screenWidth, height: 400)
-                            .onAppear(perform: {
-                                fetchRemoteImage(url: news.images.first!)
-                            })
+                            .ignoresSafeArea()
                         Text("点击这里返回").frame(width: 300, height: 300, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         HStack {
                             LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0), Color.black.opacity(0.5)]), startPoint: .top, endPoint: .bottom)
@@ -64,20 +61,6 @@ struct NewsDetailView: View {
         }
         .ignoresSafeArea()
         .navigationBarHidden(true)
-
-
-    }
-
-    func fetchRemoteImage(url: String){
-        guard let url = URL(string: url) else { return }
-        URLSession.shared.dataTask(with: url){ [self] (data, response, error) in
-            if let d = data, let image = UIImage(data: d){
-                self.remoteImage = image
-            }
-            else{
-                print(error ?? "")
-            }
-        }.resume()
     }
 }
 

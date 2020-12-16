@@ -29,6 +29,8 @@
 		B5BE0B40256B4E4100E30B62 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B5BE0B3F256B4E4100E30B62 /* RxSwift */; };
 		B5BE0B44256B4E7200E30B62 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BE0B43256B4E7200E30B62 /* NetworkManager.swift */; };
 		B5BE0B4A256B94AD00E30B62 /* RBErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BE0B49256B94AD00E30B62 /* RBErrors.swift */; };
+		B5C9FD802588B1F80057F9AE /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C9FD7F2588B1F80057F9AE /* CustomScrollView.swift */; };
+		B5C9FD852589DCE50057F9AE /* WebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C9FD842589DCE50057F9AE /* WebImage.swift */; };
 		B5F244C0255D125400E53166 /* RiBaoBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F244BF255D125400E53166 /* RiBaoBanner.swift */; };
 		B5FE6CD32578EC0B004B3CE9 /* NewsDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE6CD22578EC0A004B3CE9 /* NewsDetailViewModel.swift */; };
 		B5FE6CD62578ED3E004B3CE9 /* NewsDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FE6CD52578ED3E004B3CE9 /* NewsDetailModel.swift */; };
@@ -55,6 +57,8 @@
 		B5A5A007255D08F200433D94 /* RiBaoHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiBaoHeader.swift; sourceTree = "<group>"; };
 		B5BE0B43256B4E7200E30B62 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		B5BE0B49256B94AD00E30B62 /* RBErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RBErrors.swift; sourceTree = "<group>"; };
+		B5C9FD7F2588B1F80057F9AE /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
+		B5C9FD842589DCE50057F9AE /* WebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImage.swift; sourceTree = "<group>"; };
 		B5F244BF255D125400E53166 /* RiBaoBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiBaoBanner.swift; sourceTree = "<group>"; };
 		B5FE6CD22578EC0A004B3CE9 /* NewsDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewModel.swift; sourceTree = "<group>"; };
 		B5FE6CD52578ED3E004B3CE9 /* NewsDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailModel.swift; sourceTree = "<group>"; };
@@ -132,8 +136,7 @@
 				B532CD39256CEDE00083FE4E /* NewDetail */,
 				B507BF3E257E3026001553BC /* Gallery */,
 				B5A59FFE255CE39700433D94 /* Extensions.swift */,
-				B516E96825764D60007B0823 /* CarouselView.swift */,
-				B532CD3B256D058B0083FE4E /* SwiftUIPagerView.swift */,
+				B5C9FD7C2588B1A20057F9AE /* View */,
 				B5BE0B49256B94AD00E30B62 /* RBErrors.swift */,
 				B5A5A002255CE58F00433D94 /* Fonts.swift */,
 				B5BE0B43256B4E7200E30B62 /* NetworkManager.swift */,
@@ -150,6 +153,17 @@
 				B5A59FF4255CE25E00433D94 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B5C9FD7C2588B1A20057F9AE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B516E96825764D60007B0823 /* CarouselView.swift */,
+				B532CD3B256D058B0083FE4E /* SwiftUIPagerView.swift */,
+				B5C9FD7F2588B1F80057F9AE /* CustomScrollView.swift */,
+				B5C9FD842589DCE50057F9AE /* WebImage.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,10 +261,12 @@
 				B58DF4412567ABAA00435981 /* NewsModel.swift in Sources */,
 				B58DF43E2567A64600435981 /* DailySection.swift in Sources */,
 				B507BF40257E305E001553BC /* GalleryItemView.swift in Sources */,
+				B5C9FD852589DCE50057F9AE /* WebImage.swift in Sources */,
 				B516E96925764D60007B0823 /* CarouselView.swift in Sources */,
 				B574847A255E3547003F238C /* BannerItemView.swift in Sources */,
 				B58DF4442567AC1E00435981 /* NewsViewModel.swift in Sources */,
 				B5A5A008255D08F200433D94 /* RiBaoHeader.swift in Sources */,
+				B5C9FD802588B1F80057F9AE /* CustomScrollView.swift in Sources */,
 				B532CD30256BB76E0083FE4E /* NewsDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

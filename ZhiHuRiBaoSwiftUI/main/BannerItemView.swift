@@ -9,19 +9,13 @@ import SwiftUI
 
 struct BannerItemView: View, Identifiable {
     @ObservedObject var itemData: TopNewsModel
-    @State private var remoteImage: UIImage? = nil
     @State private var showPopover: Bool = false
     var id: Int
     var body: some View {
-
         ZStack(alignment: .bottomLeading) {
             NavigationLink(destination:  NewsDetailView(news: NewsModel(images: [itemData.image], title: itemData.title))){
-                Image(uiImage: remoteImage ?? UIImage(named: "haitun")!)
-                    .resizable()
+                WebImage(imageUrl: itemData.image)
                     .frame(width: UIScreen.screenWidth, height: 400)
-                    .onAppear(perform: {
-                        fetchRemoteImage(url: itemData.image)
-                    })
             }
             VStack(alignment: .leading) {
                 Text(itemData.title)
@@ -40,19 +34,6 @@ struct BannerItemView: View, Identifiable {
         }
         .frame(width: UIScreen.screenWidth)
     }
-
-    func fetchRemoteImage(url: String){
-            guard let url = URL(string: url) else { return }
-            URLSession.shared.dataTask(with: url){ (data, response, error) in
-                if let d = data, let image = UIImage(data: d){
-                    self.remoteImage = image
-                }
-                else{
-                    print(error ?? "")
-                }
-            }.resume()
-        }
-
 }
 
 struct BannerItem_Previews: PreviewProvider {

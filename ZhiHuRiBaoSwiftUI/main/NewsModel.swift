@@ -25,7 +25,7 @@ class NewsModel: HandyJSON, ObservableObject {
     }
 }
 
-class TopNewsModel: HandyJSON, ObservableObject {
+class TopNewsModel: HandyJSON, ObservableObject, Identifiable {
     var image: String = "haitun"
     var title: String = String.testStringShort
     var hint: String = String.testStringShort
